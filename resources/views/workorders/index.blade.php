@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- <div class="container my-4"> -->
-    <h1 class="text-center text-white mb-4">Database Pelaporan<br>Service & Maintenance Perangkat</h1><hr>
+    <h1 class="text-center text-white mb-4">Database Laporan<br>Service & Maintenance Perangkat</h1><hr>
     <a href="{{ route('workorders.create') }}" class="btn btn-success mb-3">Tambahkan Laporan</a>
     <div class="table-responsive bg-dark rounded shadow p-3">
         <table class="table table-dark table-hover text-center">
