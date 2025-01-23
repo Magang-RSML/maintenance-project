@@ -36,6 +36,7 @@ class WorkOrder extends Model
                 'completed' => 'active',
                 'pending' => 'inactive',
                 'in_progress' => 'maintenance',
+                'unread' => 'reporting',
             ];
 
             if (array_key_exists($workOrder->status, $statusMap)) {

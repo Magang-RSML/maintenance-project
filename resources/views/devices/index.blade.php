@@ -29,6 +29,8 @@
                         <!-- {{ ucfirst($device->status) }} -->
                         @if ($device->status === 'inactive')
                             <span class="badge bg-danger">Rusak</span>
+                        @elseif ($device->status === 'reporting')
+                            <span class="badge bg-warning">Proses Lapor Perbaikan</span>
                         @elseif ($device->status === 'maintenance')
                             <span class="badge bg-info">Perbaikan</span>
                         @else

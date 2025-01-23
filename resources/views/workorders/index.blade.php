@@ -14,6 +14,7 @@
                     <th>Ruang</th>
                     <th>Tanggal Laporan</th>
                     <th>Status</th>
+                    <th>Keterangan</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -27,13 +28,22 @@
                     <td>{{ $workOrder->requested_date }}</td>
                     <td>
                         <!-- {{ ucfirst($workOrder->status) }} -->
-                        @if ($workOrder->status === 'pending')
-                            <span class="badge bg-danger">Pending</span>
+                        @if ($workOrder->status === 'unread')
+                            <span class="badge bg-danger">Belum dikerjakan</span>
+                        @elseif ($workOrder->status === 'pending')
+                            <span class="badge bg-warning">Pending</span>
                         @elseif ($workOrder->status === 'in_progress')
                             <span class="badge bg-info">Proses Perbaikan</span>
                         @else
                             <span class="badge bg-success">Selesai</span>
                         @endif
+                    </td>
+                    <td>
+                        <p>
+                            Keterangan Masalah: {{ $workOrder->issue_description }}
+                            <br>
+                            Catatan Perbaikan: {{ $workOrder->notes ?: '-' }}
+                        </P>
                     </td>
                     <td>
                         <a href="{{ route('workorders.edit', $workOrder) }}" class="btn btn-warning btn-sm">Edit</a>

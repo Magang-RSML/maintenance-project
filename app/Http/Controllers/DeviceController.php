@@ -27,7 +27,7 @@ class DeviceController extends Controller
             'type' => 'required|string|max:255',
             'brand' => 'required|string|max:255|unique:devices,brand',
             'room_id' => 'required|exists:rooms,id',
-            'status' => 'required|in:active,inactive,maintenance',
+            'status' => 'required|in:active,inactive,maintenance,reporting',
         ]);
 
         Device::create($request->all());
@@ -48,7 +48,7 @@ class DeviceController extends Controller
             'type' => 'required|string|max:255',
             'brand' => 'required|string|max:255|unique:devices,brand,' . $device->id,
             'room_id' => 'required|exists:rooms,id',
-            'status' => 'required|in:active,inactive,maintenance',
+            'status' => 'required|in:active,inactive,maintenance,reporting',
         ]);
 
         $device->update($request->all());

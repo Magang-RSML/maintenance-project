@@ -28,9 +28,10 @@ class Device extends Model
         // Event to synchronize status with related work orders
         static::updated(function ($device) {
             $statusMap = [
-                'active' => 'completed',
-                'inactive' => 'pending',
-                'maintenance' => 'in_progress',
+                'completed' => 'active',
+                'pending' => 'inactive',
+                'in_progress' => 'maintenance',
+                'unread' => 'reporting',
             ];
 
             if (array_key_exists($device->status, $statusMap)) {

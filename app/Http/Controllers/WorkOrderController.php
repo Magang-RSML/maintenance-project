@@ -32,6 +32,7 @@ class WorkOrderController extends Controller
             'requested_date' => 'required|date',
             'issue_description' => 'nullable|string',
             'notes' => 'nullable|string',
+            'status' => 'required|in:pending,in_progress,completed,unread',
         ]);
 
         $device = Device::find($request->device_id);
@@ -41,7 +42,7 @@ class WorkOrderController extends Controller
             'device_id' => $device->id,
             'room_id' => $device->room_id,
             'requested_date' => $request->requested_date,
-            'status' => 'pending', // Default status
+            'status' => 'unread', // Default status
             'issue_description' => $request->issue_description,
             'notes' => $request->notes,
         ]);

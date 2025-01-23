@@ -34,6 +34,7 @@
                         <option value="active" {{ $device->status == 'active' ? 'selected' : '' }}>Active</option>
                         <option value="inactive" {{ $device->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
                         <option value="maintenance" {{ $device->status == 'maintenance' ? 'selected' : '' }}>Maintenance</option>
+                        <option value="reporting" {{ $device->status == 'reporting' ? 'selected' : '' }}>Pengajuan Laporan</option>
                     </select>
                 </div>
                 <br>
