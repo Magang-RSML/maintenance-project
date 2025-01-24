@@ -43,7 +43,7 @@
                 <div class="form-group">
                     <label for="status">Status</label>
                     <select class="form-control" id="status" name="status" required>
-                        <option value="unread" {{ $workOrder->status == 'unread' ? 'selected' : '' }}>Belum Dikerjakan</option>
+                        <!-- <option value="unread" {{ $workOrder->status == 'unread' ? 'selected' : '' }}>Belum Dikerjakan</option> -->
                         <option value="pending" {{ $workOrder->status == 'pending' ? 'selected' : '' }}>Pending</option>
                         <option value="in_progress" {{ $workOrder->status == 'in_progress' ? 'selected' : '' }}>In Progress</option>
                         <option value="completed" {{ $workOrder->status == 'completed' ? 'selected' : '' }}>Completed</option>
@@ -51,7 +51,7 @@
                 </div>
                 <br>
                 <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
-                <a href="{{ route('devices.index') }}" class="btn btn-secondary">Cancel</a>
+                <a href="{{ route('workorders.index') }}" class="btn btn-secondary">Cancel</a>
             </form>
         </div>
     </div>

@@ -28,7 +28,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="status">Status</label>
                     <select class="form-control" id="status" name="status" required>
                         <option value="active" {{ $device->status == 'active' ? 'selected' : '' }}>Active</option>
@@ -36,7 +36,7 @@
                         <option value="maintenance" {{ $device->status == 'maintenance' ? 'selected' : '' }}>Maintenance</option>
                         <option value="reporting" {{ $device->status == 'reporting' ? 'selected' : '' }}>Pengajuan Laporan</option>
                     </select>
-                </div>
+                </div> -->
                 <br>
                 <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
                 <a href="{{ route('devices.index') }}" class="btn btn-secondary">Cancel</a>

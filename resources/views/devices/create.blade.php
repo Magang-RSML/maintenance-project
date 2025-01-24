@@ -32,8 +32,8 @@
                     <label for="status">Status</label>
                     <select class="form-control" id="status" name="status" required>
                         <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                        <option value="maintenance">Maintenance</option>
+                        <!-- <option value="inactive">Inactive</option> -->
+                        <!-- <option value="maintenance">Maintenance</option> -->
                         <!-- <option value="reporting">Pengajuan Laporan</option> -->
                     </select>
                 </div>

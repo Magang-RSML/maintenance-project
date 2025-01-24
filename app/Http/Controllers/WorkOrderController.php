@@ -19,9 +19,10 @@ class WorkOrderController extends Controller
     public function create()
     {
         $devices = Device::all();
+        $rooms = Room::all();
         $users = User::all();
 
-        return view('workorders.create', compact('devices', 'users'));
+        return view('workorders.create', compact('devices', 'rooms', 'users'));
     }
 
     public function store(Request $request)
@@ -30,6 +31,7 @@ class WorkOrderController extends Controller
             'user_id' => 'required|exists:users,id',
             'device_id' => 'required|exists:devices,id',
             'requested_date' => 'required|date',
+            // 'updated_at' => 'required|date',
             'issue_description' => 'nullable|string',
             'notes' => 'nullable|string',
             'status' => 'required|in:pending,in_progress,completed,unread',
@@ -42,6 +44,7 @@ class WorkOrderController extends Controller
             'device_id' => $device->id,
             'room_id' => $device->room_id,
             'requested_date' => $request->requested_date,
+            'update_at' => $request->update_at,
             'status' => 'unread', // Default status
             'issue_description' => $request->issue_description,
             'notes' => $request->notes,
@@ -65,9 +68,10 @@ class WorkOrderController extends Controller
             'user_id' => 'required|exists:users,id',
             'device_id' => 'required|exists:devices,id',
             'requested_date' => 'required|date',
+            // 'updated_at' => 'required|date',
             'issue_description' => 'nullable|string',
             'notes' => 'nullable|string',
-            'status' => 'required|in:pending,in_progress,completed',
+            'status' => 'required|in:pending,in_progress,completed,unread',
         ]);
 
         $device = Device::find($request->device_id);
@@ -79,11 +83,15 @@ class WorkOrderController extends Controller
             'device_id' => $device->id,
             'room_id' => $device->room_id,
             'requested_date' => $request->requested_date,
-            'status' => $request->status,
+            'update_at' => $request->update_at,
+            'status' => 'unread', // Default status
             'issue_description' => $request->issue_description,
             'notes' => $request->notes,
         ]);
 
+        $workOrderkOrder = WorkOrder::findOrFail($id);
+
+        $workOrder->update($request->all());
         return redirect()->route('workorders.index')->with('success', 'Work order berhasil diperbarui.');
     }
 

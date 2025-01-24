@@ -41,14 +41,14 @@
                     <label for="status">Status</label>
                     <select class="form-control" id="status" name="status" required>
                         <option value="unread">Buat Laporan</option>
-                        <option value="pending">Pending</option>
-                        <option value="in_progress">In Progress</option>
-                        <option value="completed">Completed</option>
+                        <!-- <option value="pending">Pending</option> -->
+                        <!-- <option value="in_progress">In Progress</option> -->
+                        <!-- <option value="completed">Completed</option> -->
                     </select>
                 </div>
                 <br>
                 <button type="submit" class="btn btn-primary btn-block">Save</button>
-                <a href="{{ route('devices.index') }}" class="btn btn-secondary">Cancel</a>
+                <a href="{{ route('workorders.index') }}" class="btn btn-secondary">Cancel</a>
             </form>
         </div>
     </div>
