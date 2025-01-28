@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <h1 class="text-center text-white mb-4">User Database</h1><hr>
-    <a href="{{ route('users.create') }}" class="btn btn-success mb-3">Tambah User Baru</a>
+    <a href="{{ route('admin.users.create') }}" class="btn btn-success mb-3">Tambah User Baru</a>
     <table class="table table-dark table-striped">
         <thead>
             <tr>
@@ -28,8 +28,8 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ ucfirst($user->level) }}</td>
                 <td>
-                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline">
+                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                    <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>

@@ -7,15 +7,17 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    // Menampilkan daftar pengguna (untuk admin saja).
     public function index()
     {
-        $users = User::all();
-        return view('users.index', compact('users'));
+        $users = User::all();// Ambil semua data pengguna
+        return view('admin.users.index', compact('users'));
     }
 
+    // Menampilkan form untuk membuat pengguna baru (untuk admin saja).
     public function create()
     {
-        return view('users.create');
+        return view('admin.users.create');
     }
 
     public function store(Request $request)
@@ -29,17 +31,22 @@ class UserController extends Controller
         ]);
 
         User::create($validated);
-        return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan!');
+        return redirect()->route('admin.users.index')->with('success', 'User berhasil ditambahkan!');
     }
 
+    // Menampilkan form untuk mengedit pengguna (untuk admin saja).
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        return view('users.edit', compact('user'));
+        $user = User::findOrFail($id); // Cari pengguna berdasarkan ID
+        return view('admin.users.edit', compact('user'));
     }
 
+    // Memperbarui data pengguna (untuk admin saja).
     public function update(Request $request, $id)
     {
+        $user = User::findOrFail($id); // Cari pengguna berdasarkan ID
+
+        // Validasi input
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
@@ -48,15 +55,16 @@ class UserController extends Controller
             'level' => 'required|in:admin,it_staff,employee',
         ]);
 
-        $user = User::findOrFail($id);
         $user->update($validated);
-        return redirect()->route('users.index')->with('success', 'User berhasil diperbarui!');
+        return redirect()->route('admin.users.index')->with('success', 'User berhasil diperbarui!');
     }
 
+    // Menghapus data pengguna (untuk admin saja).
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
-        return redirect()->route('users.index')->with('success', 'User berhasil dihapus!');
+        $user = User::findOrFail($id); // Cari pengguna berdasarkan ID
+        $user->delete(); // Hapus pengguna
+
+        return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil dihapus.');
     }
 }

@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('title', 'Add New User')
 
 @section('content')
 <div class="container">
     <h1 class="text-center text-white mb-4">Tambah User Baru</h1><hr>
-    <form action="{{ route('users.store') }}" method="POST">
+    <form action="{{ route('admin.users.store') }}" method="POST">
         @csrf
 
         <div class="mb-3">
@@ -38,7 +38,7 @@
         </div>
         <br>
         <button type="submit" class="btn btn-primary">Submit</button>
-        <a href="{{ route('users.index') }}" class="btn btn-secondary">Cancel</a>
+        <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 @endsection

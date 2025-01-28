@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
 <!-- <div class="container my-4"> -->
     <h1 class="text-center text-white mb-4">Database Perangkat</h1><hr>
-    <a href="{{ route('devices.create') }}" class="btn btn-success mb-3">Tambah Perangkat Baru</a>
+    <a href="{{ route('admin.devices.create') }}" class="btn btn-success mb-3">Tambah Perangkat Baru</a>
     <div class="table-responsive bg-dark rounded shadow p-3">
         <table class="table table-dark table-hover text-center">
             <thead class="thead-light">
@@ -38,8 +38,8 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('devices.edit', $device) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('devices.destroy', $device) }}" method="POST" class="d-inline">
+                        <a href="{{ route('admin.devices.edit', $device) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('admin.devices.destroy', $device) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>

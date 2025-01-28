@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('title', 'Add New Room')
 
 @section('content')
 <div class="container">
     <h1 class="text-center text-white mb-4">Tambah Ruangan Baru</h1><hr>
-    <form action="{{ route('rooms.store') }}" method="POST">
+    <form action="{{ route('admin.rooms.store') }}" method="POST">
         @csrf
 
         <div class="mb-3">
@@ -24,7 +24,7 @@
         </div>
         <br>
         <button type="submit" class="btn btn-primary">Submit</button>
-        <a href="{{ route('rooms.index') }}" class="btn btn-secondary">Cancel</a>
+        <a href="{{ route('admin.rooms.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 @endsection

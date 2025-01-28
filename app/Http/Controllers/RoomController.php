@@ -7,17 +7,20 @@ use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
+    // Menampilkan daftar ruang (untuk admin saja).
     public function index()
     {
-        $rooms = Room::all();
-        return view('rooms.index', compact('rooms'));
+        $rooms = Room::all(); // Ambil semua data ruang
+        return view('admin.rooms.index', compact('rooms'));
     }
 
+    // Menampilkan form untuk membuat ruang baru (untuk admin saja).
     public function create()
     {
-        return view('rooms.create');
+        return view('admin.rooms.create');
     }
 
+    // Menyimpan data ruang baru (untuk admin saja).
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -27,15 +30,17 @@ class RoomController extends Controller
         ]);
 
         Room::create($validated);
-        return redirect()->route('rooms.index')->with('success', 'Ruangan berhasil ditambahkan!');
+        return redirect()->route('admin.rooms.index')->with('success', 'Ruangan berhasil ditambahkan!');
     }
 
+    // Menampilkan form untuk mengedit ruang (untuk admin saja).
     public function edit($id)
     {
         $room = Room::findOrFail($id);
-        return view('rooms.edit', compact('room'));
+        return view('admin.rooms.edit', compact('room'));
     }
 
+    // Memperbarui data ruang (untuk admin saja).
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
@@ -46,13 +51,14 @@ class RoomController extends Controller
 
         $room = Room::findOrFail($id);
         $room->update($validated);
-        return redirect()->route('rooms.index')->with('success', 'Ruangan berhasil diperbarui!');
+        return redirect()->route('admin.rooms.index')->with('success', 'Ruangan berhasil diperbarui!');
     }
 
+    // Menghapus ruang (untuk admin saja).
     public function destroy($id)
     {
         $room = Room::findOrFail($id);
         $room->delete();
-        return redirect()->route('rooms.index')->with('success', 'Ruangan berhasil dihapus!');
+        return redirect()->route('admin.rooms.index')->with('success', 'Ruang berhasil dihapus.');
     }
 }

@@ -10,9 +10,14 @@ class UserLevel
 {
     public function handle(Request $request, Closure $next): Response
     {
-       session(['user_level' => 'admin']);
-       session(['user_level' => 'it_staff']);
-       session(['user_level' => 'employee']);
-       return $next($request);
+        // Menyimpan level pengguna berdasarkan data yang ada di sesi
+        if ($user = $request->user()) {
+            session(['user_level' => $user->level]);
+        } else {
+            // Jika tidak ada pengguna yang login, atur level default
+            session(['user_level' => 'employee']);
+        }
+
+        return $next($request);
     }
 }
