@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('employee.layouts.app')
 
 @section('content')
 <!-- <div class="container my-4"> -->
     <h1 class="text-center text-white mb-4">Database Laporan<br>Service & Maintenance Perangkat</h1><hr>
-    <a href="{{ route('workorders.create') }}" class="btn btn-success mb-3">Tambahkan Laporan</a>
+    <a href="{{ route('employee.workorders.create') }}" class="btn btn-success mb-3">Tambahkan Laporan</a>
     <div class="table-responsive bg-dark rounded shadow p-3">
         <table class="table table-dark table-hover text-center">
             <thead class="thead-light">
@@ -46,8 +46,8 @@
                         </P>
                     </td>
                     <td>
-                        <a href="{{ route('workorders.edit', $workOrder) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('workorders.destroy', $workOrder) }}" method="POST" class="d-inline">
+                        <a href="{{ route('employee.workorders.edit', $workOrder) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('employee.workorders.destroy', $workOrder) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>

@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('it_staff.layouts.app')
 
 @section('content')
 <!-- <div class="container my-4"> -->
     <h1 class="text-center text-white mb-4">Edit Laporan<br>Service & Maintenance Perangkat</h1><hr>
     <div class="card bg-dark text-white shadow rounded">
         <div class="card-body">
-            <form action="{{ route('workorders.update', ['workorder' => $workOrder->id]) }}" method="POST">
+            <form action="{{ route(request()->segment(1) . '.workorders.update', $workOrder->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
@@ -51,7 +51,7 @@
                 </div>
                 <br>
                 <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
-                <a href="{{ route('workorders.index') }}" class="btn btn-secondary">Cancel</a>
+                <a href="{{ route(request()->segment(1) . '.workorders.index') }}" class="btn btn-secondary">Cancel</a>
             </form>
         </div>
     </div>

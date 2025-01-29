@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('employee.layouts.app')
 
 @section('content')
 <!-- <div class="container my-4"> -->
     <h1 class="text-center text-white mb-4">Tambah Perangkat Baru</h1><hr>
     <div class="card bg-dark text-white shadow rounded">
         <div class="card-body">
-            <form action="{{ route('devices.store') }}" method="POST">
+            <form action="{{ route (request()->segment(1) . '.devices.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="name">Device Name</label>
@@ -39,7 +39,7 @@
                 </div>
                 <br>
                 <button type="submit" class="btn btn-primary btn-block">Save</button>
-                <a href="{{ route('devices.index') }}" class="btn btn-secondary">Cancel</a>
+                <a href="{{ route(request()->segment(1) . '.devices.index') }}" class="btn btn-secondary">Cancel</a>
             </form>
         </div>
     </div>

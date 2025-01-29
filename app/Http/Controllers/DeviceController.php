@@ -6,40 +6,24 @@ use App\Models\WorkOrder;
 use App\Models\Device;
 use App\Models\Room;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class DeviceController extends Controller
 {
     // Constructor untuk middleware role
-    public function __construct()
-    {
-        // Admin bisa mengakses semua fitur
-        // IT Staff dan Employee dibatasi aksesnya
-        $this->middleware('role:admin')->except(['index', 'show', 'store', 'edit', 'update']);
-        $this->middleware('role:it_staff,employee')->only(['index', 'show', 'store', 'edit', 'update']);
-    }
-    
-    // Menampilkan daftar devices
+    // Tampilkan daftar perangkat.
     public function index()
     {
-        // Memeriksa level pengguna yang disimpan dalam session
-        $userLevel = session('user_level');
-        
-        // Admin bisa melihat semua devices
-        if ($userLevel === 'admin') {
-            $devices = Device::all();
-        } else {
-            // IT Staff dan Employee hanya bisa melihat devices terkait mereka
-            $devices = Device::where('user_id', Auth::id())->get(); // Gantilah sesuai dengan relasi pengguna
-        }
-        return view('devices.index', compact('devices'));
+        $devices = Device::all(); 
+        $role = str_replace('-', '_', request()->segment(1));
+        return view("$role.devices.index", compact('devices')); // View sesuai role
     }
 
     // Menampilkan form untuk membuat device baru
     public function create()
     {
+        $role = str_replace('-', '_', request()->segment(1));
         $rooms = Room::all();
-        return view('devices.create', compact('rooms'));
+        return view("$role.devices.create", compact('rooms'));
     }
 
     // Menyimpan device baru
@@ -54,21 +38,15 @@ class DeviceController extends Controller
         ]);
 
         Device::create($request->all());
-        return redirect()->route('devices.index')->with('success', 'Device berhasil ditambahkan.');
-    }
-
-    // Menampilkan detail device
-    public function show($id)
-    {
-        $device = Device::findOrFail($id);
-        return view('devices.show', compact('device'));
+        return redirect()->route(request()->segment(1) . '.devices.index')->with('success', 'Perangkat berhasil ditambahkan.');    
     }
 
     // Menampilkan form untuk mengedit device
     public function edit(Device $device)
     {
+        $role = str_replace('-', '_', request()->segment(1));
         $rooms = Room::all();
-        return view('devices.edit', compact('device', 'rooms'));
+        return view("$role.devices.edit", compact('device', 'rooms'));
     }
 
     // Memperbarui device yang sudah ada
@@ -79,17 +57,26 @@ class DeviceController extends Controller
             'type' => 'required|string|max:255',
             'brand' => 'required|string|max:255|unique:devices,brand,' . $device->id,
             'room_id' => 'required|exists:rooms,id',
-            'status' => 'required|in:active,inactive,maintenance,reporting',
+            // 'status' => 'required|in:active,inactive,maintenance,reporting',
         ]);
-
-        $device->update($request->all());
-
-        return redirect()->route('devices.index')->with('success', 'Device berhasil diperbarui.');
+    
+        // Update hanya dengan data yang valid
+        $device->update([
+            'name' => $request->name,
+            'type' => $request->type,
+            'brand' => $request->brand,
+            'room_id' => $request->room_id,
+            // 'status' => $request->status,
+        ]);
+    
+        return redirect()->route(request()->segment(1) . '.devices.index')->with('success', 'Perangkat berhasil diperbarui.');
     }
-
+    
+  
     public function destroy(Device $device)
     {
         $device->delete();
-        return redirect()->route('devices.index')->with('success', 'Device berhasil dihapus.');
+        return redirect()->route(request()->segment(1) . '.devices.index')
+        ->with('success', 'Perangkat berhasil dihapus.');
     }
 }
