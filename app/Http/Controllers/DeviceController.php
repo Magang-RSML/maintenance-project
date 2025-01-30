@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 class DeviceController extends Controller
 {
     // Constructor untuk middleware role
-    // Tampilkan daftar perangkat.
     public function index()
     {
         $devices = Device::all(); 
