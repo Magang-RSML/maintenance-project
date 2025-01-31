@@ -6,8 +6,9 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
 {
-    protected $middleware = [
-        // Middleware lainnya
-        \App\Http\Middleware\UserLevel::class,
+    protected $routeMiddleware = [
+        'auth' => \App\Http\Middleware\Authenticate::class,
+        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'user_level' => \App\Http\Middleware\UserLevelMiddleware::class,
     ];
 }
